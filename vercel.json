@@ -1,0 +1,21 @@
+{
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "s-maxage=0"
+        }
+      ]
+    }
+  ],
+  "functions": {
+    "app/**/*.tsx": {
+      "maxDuration": 10
+    }
+  },
+  "buildCommand": "npm run build",
+  "outputDirectory": ".next",
+  "framework": "nextjs"
+}

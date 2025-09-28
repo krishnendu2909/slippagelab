@@ -1,0 +1,178 @@
+/* SlippageLab Global Styles - SEBI-compliant fintech educational simulator */
+/* Import Inter font for professional appearance matching Nubra.io brand */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+/* TailwindCSS base styles with custom fintech optimizations */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Root variables for consistent theming across light/dark modes */
+:root {
+  --primary-blue: #3b82f6;    /* Primary CTAs and branding */
+  --success-green: #22c55e;   /* Positive metrics and gains */
+  --warning-amber: #f59e0b;   /* Slippage alerts and warnings */
+  --neutral-bg: #f3f4f6;      /* Background neutral */
+  --neutral-text: #6b7280;    /* Body text */
+  --heading-text: #1f2937;    /* Headings and emphasis */
+  --card-white: #ffffff;      /* Card backgrounds */
+}
+
+/* Dark theme variables for enhanced accessibility */
+[data-theme="dark"] {
+  --neutral-bg: #1f2937;
+  --neutral-text: #d1d5db;
+  --heading-text: #f9fafb;
+  --card-white: #374151;
+}
+
+/* Base typography optimized for financial data readability */
+html {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--neutral-bg);
+  color: var(--neutral-text);
+  line-height: 1.6;
+  /* Optimize for financial data scanning - slightly tighter line height */
+}
+
+/* Global dark mode overrides for common utilities/cards */
+.dark .bg-white { background-color: #1f2937 !important; } /* gray-800 */
+.dark .text-heading-text { color: #e5e7eb !important; } /* gray-200 */
+.dark .trade-table { background-color: #1f2937; }
+.dark .trade-table th { background-color: #374151; color: #e5e7eb; border-color: #4b5563; }
+.dark .trade-table td { border-color: #374151; }
+
+/* Custom component styles for consistent fintech UI patterns */
+@layer components {
+  /* Primary CTA button matching Nubra.io design system */
+  .btn-primary {
+    @apply bg-blue-500 text-white px-6 py-3 rounded-md font-medium;
+    @apply hover:bg-green-500 transition-colors duration-200;
+    @apply focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2;
+  }
+  
+  /* Success button for positive actions */
+  .btn-success {
+    @apply bg-green-500 text-white px-6 py-3 rounded-md font-medium;
+    @apply hover:bg-blue-500 transition-colors duration-200;
+    @apply focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2;
+  }
+  
+  /* Warning button for slippage-related actions */
+  .btn-warning {
+    @apply bg-amber-500 text-white px-6 py-3 rounded-md font-medium;
+    @apply hover:bg-amber-600 transition-colors duration-200;
+    @apply focus:outline-none focus:ring-2 focus:ring-amber-500 focus:ring-offset-2;
+  }
+  
+  /* Metric card component for displaying financial KPIs */
+  .metric-card {
+    @apply bg-white shadow-lg border-l-4 border-blue-500 p-4 m-4 rounded-md;
+    @apply hover:shadow-xl transition-shadow duration-200;
+  }
+  
+  /* Table styles optimized for trade data display */
+  .trade-table {
+    @apply w-full border-collapse bg-white rounded-lg overflow-hidden shadow-md;
+  }
+  
+  .trade-table th {
+    @apply bg-neutral-100 px-4 py-3 text-left font-semibold text-gray-800;
+    @apply border-b border-neutral-200;
+  }
+  
+  .trade-table td {
+    @apply px-4 py-3 border-b border-neutral-100;
+  }
+  
+  /* Responsive navigation styles */
+  .nav-link {
+    @apply text-white hover:text-green-500 transition-colors duration-200;
+    @apply font-medium px-3 py-2 rounded-md;
+  }
+  
+  .nav-link.active {
+    @apply text-green-500 underline underline-offset-4;
+  }
+}
+
+/* Custom utilities for fintech-specific layouts */
+@layer utilities {
+  /* 8px grid system for consistent spacing */
+  .grid-8 {
+    display: grid;
+    gap: 0.5rem; /* 8px */
+  }
+  
+  /* Responsive padding following 2rem standard */
+  .container-padding {
+    @apply px-4 md:px-8 lg:px-16 xl:px-32;
+  }
+  
+  /* Financial number formatting */
+  .currency-positive {
+    @apply text-green-500 font-semibold;
+  }
+  
+  .currency-negative {
+    @apply text-red-500 font-semibold;
+  }
+  
+  /* Slippage indicator colors */
+  .slippage-low {
+    @apply text-green-500 bg-green-50 px-2 py-1 rounded;
+  }
+  
+  .slippage-medium {
+    @apply text-amber-500 bg-amber-50 px-2 py-1 rounded;
+  }
+  
+  .slippage-high {
+    @apply text-red-500 bg-red-50 px-2 py-1 rounded;
+  }
+}
+
+/* Accessibility improvements for screen readers and keyboard navigation */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Focus styles for better keyboard navigation */
+*:focus-visible {
+  outline: 2px solid var(--primary-blue);
+  outline-offset: 2px;
+}
+
+/* Smooth transitions for theme switching */
+* {
+  transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
+
+/* Print styles for PDF export functionality */
+@media print {
+  .no-print {
+    display: none !important;
+  }
+  
+  body {
+    background: white !important;
+    color: black !important;
+  }
+  
+  .metric-card {
+    break-inside: avoid;
+    border: 1px solid #ccc;
+  }
+}
